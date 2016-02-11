@@ -9,14 +9,10 @@
 Pod::Spec.new do |s|
   s.name             = "BLListViewController"
   s.version          = "0.9.0"
-  s.summary          = "A short description of BLListViewController."
+  s.summary          = "BLListViewController is used to display information got from BLListDataSource."
 
-# This description is used to generate tags and improve search results.
-#   * Think: What does it do? Why did you write it? What is the focus?
-#   * Try to keep it short, snappy and to the point.
-#   * Write the description between the DESC delimiters below.
-#   * Finally, don't worry about the indent, CocoaPods strips it!  
   s.description      = <<-DESC
+  BLListViewController is used to display information got from BLListDataSource. Example is written with usage of BLParseFetch to demontrate abilities of each of lib.
                        DESC
 
   s.homepage         = "https://github.com/batkov/BLListViewController"
@@ -32,8 +28,6 @@ Pod::Spec.new do |s|
     'BLListViewController' => ['Pod/Assets/*.png']
   }
 
-  # s.public_header_files = 'Pod/Classes/**/*.h'
-  # s.frameworks = 'UIKit', 'MapKit'
   s.dependency 'BLListDataSource'
   s.dependency 'MJRefresh'
   s.dependency 'DateTools'

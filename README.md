@@ -1,9 +1,6 @@
 # BLListViewController
 
-[![CI Status](http://img.shields.io/travis/Hariton Batkov/BLListViewController.svg?style=flat)](https://travis-ci.org/Hariton Batkov/BLListViewController)
-[![Version](https://img.shields.io/cocoapods/v/BLListViewController.svg?style=flat)](http://cocoapods.org/pods/BLListViewController)
-[![License](https://img.shields.io/cocoapods/l/BLListViewController.svg?style=flat)](http://cocoapods.org/pods/BLListViewController)
-[![Platform](https://img.shields.io/cocoapods/p/BLListViewController.svg?style=flat)](http://cocoapods.org/pods/BLListViewController)
+![alt tag](https://raw.githubusercontent.com/batkov/BLListViewController/master/example.gif)
 
 ## Usage
 
