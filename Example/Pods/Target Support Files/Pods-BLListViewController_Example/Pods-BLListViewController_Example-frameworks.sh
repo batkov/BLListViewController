@@ -86,12 +86,18 @@ strip_invalid_archs() {
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "Pods-BLListViewController_Example/BLListDataSource.framework"
   install_framework "Pods-BLListViewController_Example/BLListViewController.framework"
+  install_framework "Pods-BLListViewController_Example/BLParseFetch.framework"
+  install_framework "Pods-BLListViewController_Example/Bolts.framework"
   install_framework "Pods-BLListViewController_Example/DateTools.framework"
   install_framework "Pods-BLListViewController_Example/MJRefresh.framework"
+  install_framework "Pods-BLListViewController_Example/Parse.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "Pods-BLListViewController_Example/BLListDataSource.framework"
   install_framework "Pods-BLListViewController_Example/BLListViewController.framework"
+  install_framework "Pods-BLListViewController_Example/BLParseFetch.framework"
+  install_framework "Pods-BLListViewController_Example/Bolts.framework"
   install_framework "Pods-BLListViewController_Example/DateTools.framework"
   install_framework "Pods-BLListViewController_Example/MJRefresh.framework"
+  install_framework "Pods-BLListViewController_Example/Parse.framework"
 fi
