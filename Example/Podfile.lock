@@ -1,0 +1,23 @@
+PODS:
+  - BLListDataSource (0.9.1)
+  - BLListViewController (0.1.0):
+    - BLListDataSource
+    - DateTools
+    - MJRefresh
+  - DateTools (1.7.0)
+  - MJRefresh (3.1.0)
+
+DEPENDENCIES:
+  - BLListViewController (from `../`)
+
+EXTERNAL SOURCES:
+  BLListViewController:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  BLListDataSource: 02090c30e1849a3780d28bfdc29917fb2c11c160
+  BLListViewController: b50d7d804273b6b5d14fac173476fe328ea4846f
+  DateTools: 53288ee8b905fdc75897a1e6b5cc0144b14cba60
+  MJRefresh: 743e6404967d1c2c688472ea3ecfde247d872db4
+
+COCOAPODS: 0.39.0
