@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = "BLListViewController"
-  s.version          = "0.9.0"
+  s.version          = "0.9.1"
   s.summary          = "BLListViewController is used to display information got from BLListDataSource."
 
   s.description      = <<-DESC
@@ -20,7 +20,7 @@ Pod::Spec.new do |s|
   s.author           = { "Hariton Batkov" => "batkov@i.ua" }
   s.source           = { :git => "https://github.com/batkov/BLListViewController.git", :tag => s.version.to_s }
 
-  s.platform     = :ios, '8.0'
+  s.platform     = :ios, '7.0'
   s.requires_arc = true
 
   s.source_files = 'Pod/Classes/**/*'
