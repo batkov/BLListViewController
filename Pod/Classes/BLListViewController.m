@@ -253,11 +253,8 @@ NSString * const kBLDataSourceLastUpdatedKey = @"lastUpdated_%@";
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
-- (void) updateItemAtIndex:(NSInteger) index {
-    NSUInteger section = 0;
-    NSAssert(index >= 0 && index < [self tableView:self.tableView
-                             numberOfRowsInSection:section], @"index out of bounds");
-    [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:index inSection:section]]
+- (void) updateItemAtIndexPath:(NSIndexPath *) indexPath {
+    [self.tableView reloadRowsAtIndexPaths:@[indexPath]
                           withRowAnimation:UITableViewRowAnimationAutomatic];
 }
 

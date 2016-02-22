@@ -33,7 +33,7 @@
 - (UIView *) parentViewForTable;
 - (void) initTableView;
 - (void) reloadItemsFromSource;
-- (void) updateItemAtIndex:(NSInteger) index;
+- (void) updateItemAtIndexPath:(NSIndexPath *) indexPath;
 #pragma mark - Abstract Methods
 - (BLListDataSource *) createDataSource;
 - (UITableViewCell *) createCellForIndexPath:(NSIndexPath *) indexPath;
