@@ -23,7 +23,7 @@
 // SOFTWARE.
 
 #import <UIKit/UIKit.h>
-#import "BLBaseFetch.h"
+@import BLListDataSource;
 @class BLListDataSource;
 
 @interface BLListViewController : UIViewController
