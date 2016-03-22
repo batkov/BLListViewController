@@ -23,8 +23,8 @@
 // SOFTWARE.
 
 #import "BLListViewController.h"
-#import "BLListDataSource.h"
-#import "MJRefresh.h"
+@import BLListDataSource;
+@import MJRefresh;
 
 @interface BLListViewController () <BLDataSourceDelegate, UITableViewDataSource, UITableViewDelegate>
 @property (nonatomic, strong) IBOutlet UITableView * tableView;

@@ -23,7 +23,7 @@
 // SOFTWARE.
 
 #import "BLListViewController+Subclass.h"
-#import "NSDate+DateTools.h"
+@import DateTools;
 #import <QuartzCore/QuartzCore.h>
 
 NSString * const kBLListDataSourceDefaultIdentifier = @"kBLListDataSourceDefaultIdentifier";
