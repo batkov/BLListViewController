@@ -16,7 +16,7 @@ install_framework()
     local source="$1"
   fi
 
-  local destination="${CONFIGURATION_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}"
+  local destination="${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}"
 
   if [ -L "${source}" ]; then
       echo "Symlinked..."
@@ -84,14 +84,14 @@ strip_invalid_archs() {
 
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
-  install_framework "Pods-BLListViewController_Tests/BLListDataSource.framework"
-  install_framework "Pods-BLListViewController_Tests/BLListViewController.framework"
-  install_framework "Pods-BLListViewController_Tests/DateTools.framework"
-  install_framework "Pods-BLListViewController_Tests/MJRefresh.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/BLListDataSource/BLListDataSource.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/BLListViewController/BLListViewController.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/DateTools/DateTools.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/MJRefresh/MJRefresh.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
-  install_framework "Pods-BLListViewController_Tests/BLListDataSource.framework"
-  install_framework "Pods-BLListViewController_Tests/BLListViewController.framework"
-  install_framework "Pods-BLListViewController_Tests/DateTools.framework"
-  install_framework "Pods-BLListViewController_Tests/MJRefresh.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/BLListDataSource/BLListDataSource.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/BLListViewController/BLListViewController.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/DateTools/DateTools.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/MJRefresh/MJRefresh.framework"
 fi

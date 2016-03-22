@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '0996922F62DF1E109513E29D'
+               BlueprintIdentifier = '6F51F2CA30AD9B7EB0105CA1DC16B579'
                BlueprintName = 'BLListViewController'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'BLListViewController.framework'>

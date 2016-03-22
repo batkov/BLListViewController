@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = "BLListViewController"
-  s.version          = "0.9.1"
+  s.version          = "0.9.2"
   s.summary          = "BLListViewController is used to display information got from BLListDataSource."
 
   s.description      = <<-DESC
@@ -24,9 +24,6 @@ Pod::Spec.new do |s|
   s.requires_arc = true
 
   s.source_files = 'Pod/Classes/**/*'
-  s.resource_bundles = {
-    'BLListViewController' => ['Pod/Assets/*.png']
-  }
 
   s.dependency 'BLListDataSource'
   s.dependency 'MJRefresh'

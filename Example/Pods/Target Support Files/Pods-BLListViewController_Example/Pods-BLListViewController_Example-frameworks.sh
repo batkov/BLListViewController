@@ -16,7 +16,7 @@ install_framework()
     local source="$1"
   fi
 
-  local destination="${CONFIGURATION_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}"
+  local destination="${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}"
 
   if [ -L "${source}" ]; then
       echo "Symlinked..."
@@ -84,20 +84,20 @@ strip_invalid_archs() {
 
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
-  install_framework "Pods-BLListViewController_Example/BLListDataSource.framework"
-  install_framework "Pods-BLListViewController_Example/BLListViewController.framework"
-  install_framework "Pods-BLListViewController_Example/BLParseFetch.framework"
-  install_framework "Pods-BLListViewController_Example/Bolts.framework"
-  install_framework "Pods-BLListViewController_Example/DateTools.framework"
-  install_framework "Pods-BLListViewController_Example/MJRefresh.framework"
-  install_framework "Pods-BLListViewController_Example/Parse.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/BLListDataSource/BLListDataSource.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/BLListViewController/BLListViewController.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/BLParseFetch/BLParseFetch.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/Bolts/Bolts.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/DateTools/DateTools.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/MJRefresh/MJRefresh.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/Parse/Parse.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
-  install_framework "Pods-BLListViewController_Example/BLListDataSource.framework"
-  install_framework "Pods-BLListViewController_Example/BLListViewController.framework"
-  install_framework "Pods-BLListViewController_Example/BLParseFetch.framework"
-  install_framework "Pods-BLListViewController_Example/Bolts.framework"
-  install_framework "Pods-BLListViewController_Example/DateTools.framework"
-  install_framework "Pods-BLListViewController_Example/MJRefresh.framework"
-  install_framework "Pods-BLListViewController_Example/Parse.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/BLListDataSource/BLListDataSource.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/BLListViewController/BLListViewController.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/BLParseFetch/BLParseFetch.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/Bolts/Bolts.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/DateTools/DateTools.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/MJRefresh/MJRefresh.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/Parse/Parse.framework"
 fi

@@ -1,12 +1,12 @@
 source 'https://github.com/CocoaPods/Specs.git'
 use_frameworks!
 
-target 'BLListViewController_Example', :exclusive => true do
+target 'BLListViewController_Example' do
   pod 'BLListViewController', :path => '../'
   pod 'BLParseFetch'
 end
 
-target 'BLListViewController_Tests', :exclusive => true do
+target 'BLListViewController_Tests' do
   pod 'BLListViewController', :path => '../'
 
   
