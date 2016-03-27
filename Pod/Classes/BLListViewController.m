@@ -47,7 +47,8 @@ NSString * const kBLDataSourceLastUpdatedKey = @"lastUpdated_%@";
         return;
     }
     UIView * parentView = [self parentViewForTable];
-    self.tableView = [[UITableView alloc] initWithFrame:parentView.bounds style:UITableViewStylePlain];
+    self.tableView = [[UITableView alloc] initWithFrame:parentView.bounds
+                                                  style:[self preferredTableViewStyle]];
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     self.tableView.translatesAutoresizingMaskIntoConstraints = NO;
@@ -84,6 +85,10 @@ NSString * const kBLDataSourceLastUpdatedKey = @"lastUpdated_%@";
                                                           multiplier:1.0
                                                             constant:0.0]];
     //self.view.translatesAutoresizingMaskIntoConstraints = YES;
+}
+
+- (UITableViewStyle) preferredTableViewStyle {
+    return UITableViewStylePlain;
 }
 
 - (void) viewDidAppear:(BOOL)animated {

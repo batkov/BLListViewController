@@ -30,6 +30,8 @@
 @property (nonatomic, strong) IBOutlet UITableView * tableView;
 @property (nonatomic, strong) BLListDataSource * dataSource;
 
+- (UITableViewStyle) preferredTableViewStyle;
+
 - (UIView *) parentViewForTable;
 - (void) initTableView;
 - (void) reloadItemsFromSource;
