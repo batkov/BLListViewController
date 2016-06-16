@@ -68,6 +68,9 @@
         if (error) {
             // TODO implement loging ?
         } else if (!selff.dataStructure || refresh) {
+            if (selff.fetchMode == BLFetchModeOfflineOnly && [selff shouldClearList]) {
+                selff.dataStructure = nil;
+            }
             BLBaseFetchResult * result = [selff createFetchResultForLocalObject:object];
             [selff processFetchResult:result];
         }
@@ -111,7 +114,7 @@
 }
 
 - (void) runRequest {
-    if (self.fetchMode == BLFetchModeOnfflineOnly) {
+    if (self.fetchMode == BLFetchModeOfflineOnly) {
         [self fetchOfflineData:YES];
         return;
     }
@@ -204,6 +207,11 @@
 }
 
 - (BLDataStructure *) dataStructureFromFetchResult:(BLBaseFetchResult *) fetchResult {
+    if (self.dataStrucutreBlock) {
+        BLDataStructure * dataStructure = self.dataStrucutreBlock(fetchResult);
+        NSAssert([dataStructure isKindOfClass:[BLDataStructure class]], @"Wrong class or nil");
+        return dataStructure;
+    }
     return [BLDataStructure dataStructureWithFetchResult:fetchResult];
 }
 

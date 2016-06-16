@@ -1,6 +1,8 @@
-FRAMEWORK_SEARCH_PATHS = $(inherited) "$CONFIGURATION_BUILD_DIR/BLListDataSource" "$CONFIGURATION_BUILD_DIR/BLListViewController" "$CONFIGURATION_BUILD_DIR/DateTools" "$CONFIGURATION_BUILD_DIR/MJRefresh"
+FRAMEWORK_SEARCH_PATHS = $(inherited) "$PODS_CONFIGURATION_BUILD_DIR/BLListDataSource" "$PODS_CONFIGURATION_BUILD_DIR/BLListViewController" "$PODS_CONFIGURATION_BUILD_DIR/DateTools" "$PODS_CONFIGURATION_BUILD_DIR/MJRefresh"
 GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
 LD_RUNPATH_SEARCH_PATHS = $(inherited) '@executable_path/Frameworks' '@loader_path/Frameworks'
-OTHER_CFLAGS = $(inherited) -iquote "$CONFIGURATION_BUILD_DIR/BLListDataSource/BLListDataSource.framework/Headers" -iquote "$CONFIGURATION_BUILD_DIR/BLListViewController/BLListViewController.framework/Headers" -iquote "$CONFIGURATION_BUILD_DIR/DateTools/DateTools.framework/Headers" -iquote "$CONFIGURATION_BUILD_DIR/MJRefresh/MJRefresh.framework/Headers"
+OTHER_CFLAGS = $(inherited) -iquote "$PODS_CONFIGURATION_BUILD_DIR/BLListDataSource/BLListDataSource.framework/Headers" -iquote "$PODS_CONFIGURATION_BUILD_DIR/BLListViewController/BLListViewController.framework/Headers" -iquote "$PODS_CONFIGURATION_BUILD_DIR/DateTools/DateTools.framework/Headers" -iquote "$PODS_CONFIGURATION_BUILD_DIR/MJRefresh/MJRefresh.framework/Headers"
 OTHER_LDFLAGS = $(inherited) -framework "BLListDataSource" -framework "BLListViewController" -framework "DateTools" -framework "MJRefresh"
+PODS_BUILD_DIR = $BUILD_DIR
+PODS_CONFIGURATION_BUILD_DIR = $PODS_BUILD_DIR/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)
 PODS_ROOT = ${SRCROOT}/Pods

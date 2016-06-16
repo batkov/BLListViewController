@@ -1,6 +1,6 @@
 {
   "name": "BLListViewController",
-  "version": "0.9.1",
+  "version": "0.9.6",
   "summary": "BLListViewController is used to display information got from BLListDataSource.",
   "description": "BLListViewController is used to display information got from BLListDataSource. Example is written with usage of BLParseFetch to demontrate abilities of each of lib.",
   "homepage": "https://github.com/batkov/BLListViewController",
@@ -10,7 +10,7 @@
   },
   "source": {
     "git": "https://github.com/batkov/BLListViewController.git",
-    "tag": "0.9.1"
+    "tag": "0.9.6"
   },
   "platforms": {
     "ios": "7.0"

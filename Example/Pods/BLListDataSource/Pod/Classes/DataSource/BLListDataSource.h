@@ -29,6 +29,8 @@
 #import "BLBaseFetchResult.h"
 
 typedef BLBaseFetchResult*(^BLFetchResultBlock)(id object, BOOL isLocal);
+typedef BLDataStructure*(^BLDataStructureBlock)(BLBaseFetchResult * fetchResult);
+typedef BLDataSorting*(^BLDataSortingBlock)(BLBaseFetchResult * fetchResult);
 typedef void (^BLItemsStoredBlock)(NSError * error);
 
 @interface BLListDataSource : BLDataSource
@@ -41,6 +43,11 @@ typedef void (^BLItemsStoredBlock)(NSError * error);
 
 @property (nonatomic, copy) dispatch_block_t itemsChangedBlock;
 @property (nonatomic, copy) BLFetchResultBlock fetchResultBlock; // Will return results from BLSimpleListFetchResult by default
+
+@property (nonatomic, copy) BLDataStructureBlock dataStrucutreBlock; // Will return BLDataStructure by default
+@property (nonatomic, copy) BLDataSortingBlock dataSortingBlock; // The sorting is BLDataSortingCreatedAt by default
+@property (nonatomic, copy) BLCustomSortingBlock customSortingBlock; // You need to return BLDataSortingSortingCustom in dataSortingBlock id you want to use
+
 @property (nonatomic, copy) BLItemsStoredBlock storedBlock; // Called after all objects stored
 
 - (instancetype) init NS_UNAVAILABLE;
