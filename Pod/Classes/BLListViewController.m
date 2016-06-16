@@ -43,7 +43,7 @@ NSString * const kBLDataSourceLastUpdatedKey = @"lastUpdated_%@";
 }
 
 - (void) initTableView {
-    if (self.tableView) {
+    if (self.tableView || [self isClassAbstract]) {
         return;
     }
     UIView * parentView = [self parentViewForTable];
@@ -380,6 +380,11 @@ forRowAtIndexPath:(NSIndexPath *)indexPath {
 
 - (NSString *) lastUpdatedKey {
     return [NSString stringWithFormat:kBLDataSourceLastUpdatedKey, NSStringFromClass([self class])];
+}
+
+#pragma mark - 
+- (BOOL) isClassAbstract {
+    return NO;
 }
 
 @end

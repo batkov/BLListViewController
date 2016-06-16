@@ -43,6 +43,8 @@
 - (NSString *) reuseIdentifierForIndexPath:(NSIndexPath *) indexPath;
 - (void) cellSelectedAtIndexPath:(NSIndexPath *) indexPath;
 
+- (BOOL) isClassAbstract; // Default is NO. Return YES if you don't want to create DataSource and Table for this class.
+
 #pragma mark -
 - (BOOL) loadMoreAvailable; // Default is YES. Asks subclasses whether it should create loadMoreController or not.
 - (BOOL) refreshAvailable; // Default is YES. Asks subclasses whether it should create refreshController or not.
