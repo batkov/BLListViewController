@@ -182,7 +182,12 @@ NSString * const kBLDataSourceLastUpdatedKey = @"lastUpdated_%@";
             [weakSelf reloadItemsFromSource];
         });
     };
-    [self.dataSource startContentLoading];
+    // Actual case when controller receives dataSource full of data
+    if (self.dataSource.state == BLDataSourceStateContent) {
+        [self.tableView reloadData];
+    } else {
+        [self.dataSource startContentLoading];
+    }
 }
 
 - (void) pullToRefreshRaised {
