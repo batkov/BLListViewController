@@ -36,6 +36,8 @@
 - (void) initTableView;
 - (void) reloadItemsFromSource;
 - (void) updateItemAtIndexPath:(NSIndexPath *) indexPath;
+- (void) startLoadingDataSource;
+- (BOOL) shouldCreateDataSource;
 #pragma mark - Abstract Methods
 - (BLListDataSource *) createDataSource;
 - (UITableViewCell *) createCellForIndexPath:(NSIndexPath *) indexPath;

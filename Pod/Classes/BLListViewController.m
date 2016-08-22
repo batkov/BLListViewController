@@ -34,7 +34,8 @@ NSString * const kBLDataSourceLastUpdatedKey = @"lastUpdated_%@";
 - (void) viewDidLoad {
     [super viewDidLoad];
     [self initTableView];
-    [self setupUI];
+    [self setupDataSource];
+    [self startLoadingDataSource];
 }
 
 #pragma mark - Table
@@ -170,8 +171,8 @@ NSString * const kBLDataSourceLastUpdatedKey = @"lastUpdated_%@";
     });
 }
 
-- (void) setupUI {
-    if (!self.tableView) {
+- (void) setupDataSource {
+    if (![self shouldCreateDataSource]) {
         return;
     }
     self.dataSource = [self createDataSource];
@@ -182,6 +183,9 @@ NSString * const kBLDataSourceLastUpdatedKey = @"lastUpdated_%@";
             [weakSelf reloadItemsFromSource];
         });
     };
+}
+
+- (void) startLoadingDataSource {
     // Actual case when controller receives dataSource full of data
     if (self.dataSource.state == BLDataSourceStateContent) {
         [self.tableView reloadData];
@@ -190,6 +194,11 @@ NSString * const kBLDataSourceLastUpdatedKey = @"lastUpdated_%@";
     }
 }
 
+- (BOOL) shouldCreateDataSource {
+    return self.tableView != nil;
+}
+
+#pragma mark -
 - (void) pullToRefreshRaised {
     [self.dataSource refreshContentIfPossible];
 }
