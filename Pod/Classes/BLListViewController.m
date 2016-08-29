@@ -259,13 +259,8 @@ NSString * const kBLDataSourceLastUpdatedKey = @"lastUpdated_%@";
         cell = [self createCellForIndexPath:indexPath];
         NSAssert(cell, @"Cannot handle nil value of createCellForIndexPath:");
     }
-    return cell;
-}
-
-- (void)tableView:(UITableView *)tableView
-  willDisplayCell:(UITableViewCell *)cell
-forRowAtIndexPath:(NSIndexPath *)indexPath {
     [self customizeCell:cell forIndexPath:indexPath];
+    return cell;
 }
 
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
