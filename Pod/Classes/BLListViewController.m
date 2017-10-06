@@ -135,6 +135,7 @@ NSString * const kBLDataSourceLastUpdatedKey = @"lastUpdated_%@";
             [footer setTitle:@"Loading..." forState:MJRefreshStateRefreshing];
             
             self.tableView.mj_footer = footer;
+            self.tableView.mj_footer.hidden = YES;
         }
     } else {
         if ([self refreshAvailable]) {
@@ -161,6 +162,7 @@ NSString * const kBLDataSourceLastUpdatedKey = @"lastUpdated_%@";
             [footer setTitle:@" " forState:MJRefreshStateNoMoreData];
             
             self.tableView.mj_footer = footer;
+            self.tableView.mj_footer.hidden = YES;
         }
     }
     
@@ -358,7 +360,6 @@ NSString * const kBLDataSourceLastUpdatedKey = @"lastUpdated_%@";
         
         self.tableView.mj_footer.hidden = NO;
         self.tableView.mj_header.hidden = NO;
-        
         if ([self invertRefreshActions]) {
             if ([self.dataSource canLoadMore] ) {
                 self.tableView.mj_header.state = MJRefreshStateIdle;
@@ -372,7 +373,7 @@ NSString * const kBLDataSourceLastUpdatedKey = @"lastUpdated_%@";
                 [self.tableView.mj_footer endRefreshingWithNoMoreData];
             }
         }
-    });    
+    });
 }
 
 - (BOOL) loadMoreAvailable {
@@ -391,9 +392,10 @@ NSString * const kBLDataSourceLastUpdatedKey = @"lastUpdated_%@";
     return [NSString stringWithFormat:kBLDataSourceLastUpdatedKey, NSStringFromClass([self class])];
 }
 
-#pragma mark - 
+#pragma mark -
 - (BOOL) isClassAbstract {
     return NO;
 }
 
 @end
+
