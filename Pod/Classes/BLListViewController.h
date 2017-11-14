@@ -26,6 +26,8 @@
 @import BLListDataSource;
 @class BLListDataSource;
 
+extern NSString * const kBLListDataSourceDefaultIdentifier;
+
 @interface BLListViewController : UIViewController
 
 @property (nonatomic, strong, readonly) BLListDataSource * dataSource;

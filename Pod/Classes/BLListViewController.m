@@ -285,8 +285,9 @@ NSString * const kBLDataSourceLastUpdatedKey = @"lastUpdated_%@";
 }
 
 - (UITableViewCell *) createCellForIndexPath:(NSIndexPath *) indexPath {
+    NSString * reuseIdentifier = [self reuseIdentifierForIndexPath:indexPath];
     return [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
-                                  reuseIdentifier:kBLListDataSourceDefaultIdentifier]; // For subclassing
+                                  reuseIdentifier:reuseIdentifier]; // For subclassing
 }
 
 - (NSString *) reuseIdentifierForIndexPath:(NSIndexPath *) indexPath {
@@ -296,6 +297,10 @@ NSString * const kBLDataSourceLastUpdatedKey = @"lastUpdated_%@";
 #pragma mark - Abstract Methods
 - (void) customizeCell:(UITableViewCell *) cell forIndexPath:(NSIndexPath *) indexPath {
     // Do nothing. For subclassing
+#ifdef DEBUG
+    id<BLDataObject> object = [self.dataSource.dataStructure objectForIndexPath:indexPath];
+    cell.textLabel.text = object.objectId;
+#endif
 }
 
 - (void) cellSelectedAtIndexPath:(NSIndexPath *) indexPath {
