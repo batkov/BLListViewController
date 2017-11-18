@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = "BLListViewController"
-  s.version          = "0.9.13"
+  s.version          = "0.9.14"
   s.summary          = "BLListViewController is used to display information got from BLListDataSource."
 
   s.description      = <<-DESC

@@ -85,7 +85,7 @@ NSString * const kBLDataSourceLastUpdatedKey = @"lastUpdated_%@";
                                                            attribute:NSLayoutAttributeBottom
                                                           multiplier:1.0
                                                             constant:0.0]];
-    //self.view.translatesAutoresizingMaskIntoConstraints = YES;
+    self.tableView.rowHeight = 50;
 }
 
 - (UITableViewStyle) preferredTableViewStyle {
@@ -114,6 +114,7 @@ NSString * const kBLDataSourceLastUpdatedKey = @"lastUpdated_%@";
             MJRefreshNormalHeader * header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
                 [weakSelf pullToLoadMoreRaised];
             }];
+            // TODO localization
             [header setTitle:@"Pull down to load more" forState:MJRefreshStateIdle];
             [header setTitle:@"Release to refresh"  forState:MJRefreshStatePulling];
             [header setTitle:@"Loading..." forState:MJRefreshStateRefreshing];
@@ -266,7 +267,7 @@ NSString * const kBLDataSourceLastUpdatedKey = @"lastUpdated_%@";
 }
 
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 50;
+    return tableView.rowHeight;
 }
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -330,6 +331,7 @@ NSString * const kBLDataSourceLastUpdatedKey = @"lastUpdated_%@";
 
 - (void) showNoContent {
     [self stopLoading:YES];
+    [[NSUserDefaults standardUserDefaults] setObject:[NSDate date] forKey:[self lastUpdatedKey]];
     if ([self invertRefreshActions]) {
         self.tableView.mj_header.hidden = YES;
     } else {
@@ -347,6 +349,7 @@ NSString * const kBLDataSourceLastUpdatedKey = @"lastUpdated_%@";
 }
 
 - (void) showContent {
+    [[NSUserDefaults standardUserDefaults] setObject:[NSDate date] forKey:[self lastUpdatedKey]];
     [self stopLoading:YES];
 }
 
