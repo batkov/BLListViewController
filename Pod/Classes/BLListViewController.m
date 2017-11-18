@@ -168,7 +168,7 @@ NSString * const kBLDataSourceLastUpdatedKey = @"lastUpdated_%@";
     
     [self dataSource:self.dataSource stateChanged:self.dataSource.state];
     
-    dispatch_async(dispatch_get_main_queue(), ^{
+    dispatch_barrier_async(dispatch_get_main_queue(), ^{
         [self.view.layer removeAllAnimations];
     });
 }
@@ -181,7 +181,7 @@ NSString * const kBLDataSourceLastUpdatedKey = @"lastUpdated_%@";
     NSAssert(self.dataSource, @"You need to implement - createDataSource");
     __weak typeof(self) weakSelf = self;
     self.dataSource.itemsChangedBlock = ^() {
-        dispatch_async(dispatch_get_main_queue(), ^{
+        dispatch_barrier_async(dispatch_get_main_queue(), ^{
             [weakSelf reloadItemsFromSource];
         });
     };
