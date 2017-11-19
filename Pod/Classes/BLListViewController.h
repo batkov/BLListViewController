@@ -29,7 +29,12 @@ extern NSString * const kBLListDataSourceDefaultCellReuseIdentifier;
 
 @interface BLListViewController : UIViewController
 
-@property (nonatomic, strong, readonly) BLListDataSource * dataSource;
+// Set data source that will work for this controller
+@property (nonatomic, strong) BLListDataSource * dataSource;
+
+// or set 'fetch' and 'update' before first dataSource call
+// and BLListDataSource will be created with them
 @property (nonatomic, strong) id <BLBaseFetch> fetch;
+@property (nonatomic, strong) id <BLBaseUpdate> update;
 
 @end

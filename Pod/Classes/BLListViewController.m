@@ -30,6 +30,7 @@ NSString * const kBLListDataSourceDefaultCellReuseIdentifier = @"kBLListDataSour
 NSString * const kBLDataSourceLastUpdatedKey = @"lastUpdated_%@";
 
 @implementation BLListViewController
+@synthesize dataSource = _dataSource;
 
 - (void) viewDidLoad {
     [super viewDidLoad];
@@ -164,14 +165,27 @@ NSString * const kBLDataSourceLastUpdatedKey = @"lastUpdated_%@";
     });
 }
 
+- (BLListDataSource *) dataSource {
+    if (!_dataSource) {
+        [self setupDataSource];
+    }
+    return _dataSource;
+}
+
 - (void) setupDataSource {
     if (![self shouldCreateDataSource]) {
         return;
     }
+    
+    // Already setup
+    if (self.dataSource) {
+        return;
+    }
+    
     self.dataSource = [self createDataSource];
     NSAssert(self.dataSource, @"You need to implement - createDataSource");
     __weak typeof(self) weakSelf = self;
-    self.dataSource.itemsChangedBlock = ^() {
+    self.dataSource.itemsChangedBlock = ^(id  _Nullable object) {
         dispatch_barrier_async(dispatch_get_main_queue(), ^{
             [weakSelf reloadItemsFromSource];
         });
@@ -206,13 +220,16 @@ NSString * const kBLDataSourceLastUpdatedKey = @"lastUpdated_%@";
 
 #pragma mark - Data Source
 - (void) setDataSource:(BLListDataSource *)dataSource {
-    if (_dataSource) {
-        _dataSource.delegate = nil;
-    }
+    // Cleanup callbacks from previous data source
+    id block = _dataSource.itemsChangedBlock;
+    _dataSource.delegate = nil;
+    _dataSource.itemsChangedBlock = nil;
+    
     _dataSource = dataSource;
-    if (_dataSource) {
-        _dataSource.delegate = self;
-    }
+    
+    // setup callback for new dataSource
+    _dataSource.delegate = self;
+    _dataSource.itemsChangedBlock = block;
 }
 
 - (void) dataSource:(BLDataSource *)dataSource stateChanged:(BLDataSourceState)state {

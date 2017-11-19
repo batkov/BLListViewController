@@ -28,7 +28,6 @@
 
 @interface BLListViewController () <BLDataSourceDelegate, UITableViewDataSource, UITableViewDelegate>
 @property (nonatomic, strong) IBOutlet UITableView * tableView;
-@property (nonatomic, strong) BLListDataSource * dataSource;
 
 - (UITableViewStyle) preferredTableViewStyle;
 
