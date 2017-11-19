@@ -24,9 +24,8 @@
 
 #import <UIKit/UIKit.h>
 @import BLListDataSource;
-@class BLListDataSource;
 
-extern NSString * const kBLListDataSourceDefaultIdentifier;
+extern NSString * const kBLListDataSourceDefaultCellReuseIdentifier;
 
 @interface BLListViewController : UIViewController
 

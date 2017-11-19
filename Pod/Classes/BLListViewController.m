@@ -26,7 +26,7 @@
 @import DateTools;
 #import <QuartzCore/QuartzCore.h>
 
-NSString * const kBLListDataSourceDefaultIdentifier = @"kBLListDataSourceDefaultIdentifier";
+NSString * const kBLListDataSourceDefaultCellReuseIdentifier = @"kBLListDataSourceDefaultCellReuseIdentifier";
 NSString * const kBLDataSourceLastUpdatedKey = @"lastUpdated_%@";
 
 @implementation BLListViewController
@@ -109,20 +109,15 @@ NSString * const kBLDataSourceLastUpdatedKey = @"lastUpdated_%@";
 
 - (void) configureRefreshController {
     __weak typeof(self) weakSelf = self;
+    NSString * lastUpdated = [NSBundle mj_localizedStringForKey:MJRefreshHeaderLastTimeText];
     if ([self invertRefreshActions]) {
         if ([self refreshAvailable]) {
             MJRefreshNormalHeader * header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
                 [weakSelf pullToLoadMoreRaised];
             }];
-            // TODO localization
-            [header setTitle:@"Pull down to load more" forState:MJRefreshStateIdle];
-            [header setTitle:@"Release to refresh"  forState:MJRefreshStatePulling];
-            [header setTitle:@"Loading..." forState:MJRefreshStateRefreshing];
-            [header setTitle:@" " forState:MJRefreshStateNoMoreData];
-            
-            
+            header.automaticallyChangeAlpha = YES;
             header.lastUpdatedTimeText =  ^(NSDate *lastUpdatedTime) {
-                return lastUpdatedTime ? [NSString stringWithFormat:@"Last updated:%@", [NSDate timeAgoSinceDate:lastUpdatedTime]] : nil;
+                return lastUpdatedTime ? [NSString stringWithFormat:@"%@%@", lastUpdated, [NSDate timeAgoSinceDate:lastUpdatedTime]] : nil;
             };
             header.lastUpdatedTimeKey = [self lastUpdatedKey];
             
@@ -132,8 +127,7 @@ NSString * const kBLDataSourceLastUpdatedKey = @"lastUpdated_%@";
             MJRefreshBackNormalFooter * footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
                 [weakSelf pullToRefreshRaised];
             }];
-            [footer setTitle:@"Click or drag up to refresh" forState:MJRefreshStateIdle];
-            [footer setTitle:@"Loading..." forState:MJRefreshStateRefreshing];
+            footer.automaticallyChangeAlpha = YES;
             
             self.tableView.mj_footer = footer;
             self.tableView.mj_footer.hidden = YES;
@@ -143,12 +137,10 @@ NSString * const kBLDataSourceLastUpdatedKey = @"lastUpdated_%@";
             MJRefreshNormalHeader * header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
                 [weakSelf pullToRefreshRaised];
             }];
-            [header setTitle:@"Pull down to refresh" forState:MJRefreshStateIdle];
-            [header setTitle:@"Release to refresh" forState:MJRefreshStatePulling];
-            [header setTitle:@"Loading..." forState:MJRefreshStateRefreshing];
+            header.automaticallyChangeAlpha = YES;
             
             header.lastUpdatedTimeText =  ^(NSDate *lastUpdatedTime) {
-                return lastUpdatedTime ? [NSString stringWithFormat:@"Last updated:%@", [NSDate timeAgoSinceDate:lastUpdatedTime]] : nil;
+                return lastUpdatedTime ? [NSString stringWithFormat:@"%@%@", lastUpdated, [NSDate timeAgoSinceDate:lastUpdatedTime]] : nil;
             };
             header.lastUpdatedTimeKey = [self lastUpdatedKey];
             
@@ -158,9 +150,7 @@ NSString * const kBLDataSourceLastUpdatedKey = @"lastUpdated_%@";
             MJRefreshAutoNormalFooter * footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
                 [weakSelf pullToLoadMoreRaised];
             }];
-            [footer setTitle:@"Click or drag up to load more" forState:MJRefreshStateIdle];
-            [footer setTitle:@"Loading..." forState:MJRefreshStateRefreshing];
-            [footer setTitle:@" " forState:MJRefreshStateNoMoreData];
+            footer.automaticallyChangeAlpha = YES;
             
             self.tableView.mj_footer = footer;
             self.tableView.mj_footer.hidden = YES;
@@ -292,7 +282,7 @@ NSString * const kBLDataSourceLastUpdatedKey = @"lastUpdated_%@";
 }
 
 - (NSString *) reuseIdentifierForIndexPath:(NSIndexPath *) indexPath {
-    return kBLListDataSourceDefaultIdentifier; // For subclassing
+    return kBLListDataSourceDefaultCellReuseIdentifier; // For subclassing
 }
 
 #pragma mark - Abstract Methods
