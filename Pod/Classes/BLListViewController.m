@@ -32,6 +32,38 @@ NSString * const kBLDataSourceLastUpdatedKey = @"lastUpdated_%@";
 @implementation BLListViewController
 @synthesize dataSource = _dataSource;
 
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        [self commonInit];
+    }
+    return self;
+}
+
+- (instancetype)initWithCoder:(NSCoder *)coder
+{
+    self = [super initWithCoder:coder];
+    if (self) {
+        [self commonInit];
+    }
+    return self;
+}
+
+-(instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
+    if ([super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) {
+        [self commonInit];
+    }
+    return self;
+}
+
+- (void) commonInit {
+    self.invertPullToRefreshControllers = NO;
+    self.pullToRefreshEnabled = YES;
+    self.loadMoreEnabled = YES;
+}
+
+#pragma mark - View Lifecycle
 - (void) viewDidLoad {
     [super viewDidLoad];
     [self initTableView];
@@ -45,7 +77,7 @@ NSString * const kBLDataSourceLastUpdatedKey = @"lastUpdated_%@";
 }
 
 - (void) initTableView {
-    if (self.tableView || [self isClassAbstract]) {
+    if (self.tableView) {
         return;
     }
     UIView * parentView = [self parentViewForTable];
@@ -111,7 +143,7 @@ NSString * const kBLDataSourceLastUpdatedKey = @"lastUpdated_%@";
 - (void) configureRefreshController {
     __weak typeof(self) weakSelf = self;
     NSString * lastUpdated = [NSBundle mj_localizedStringForKey:MJRefreshHeaderLastTimeText];
-    if ([self invertRefreshActions]) {
+    if (self.invertPullToRefreshControllers) {
         if ([self refreshAvailable]) {
             MJRefreshNormalHeader * header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
                 [weakSelf pullToLoadMoreRaised];
@@ -173,10 +205,6 @@ NSString * const kBLDataSourceLastUpdatedKey = @"lastUpdated_%@";
 }
 
 - (void) setupDataSource {
-    if (![self shouldCreateDataSource]) {
-        return;
-    }
-    
     // Already setup
     if (_dataSource) {
         return;
@@ -193,16 +221,13 @@ NSString * const kBLDataSourceLastUpdatedKey = @"lastUpdated_%@";
 }
 
 - (void) startLoadingDataSource {
-    // Actual case when controller receives dataSource full of data
-    if (self.dataSource.state == BLDataSourceStateContent) {
+    // Actual case when controller receives dataSource with existing data
+    if (self.dataSource.state == BLDataSourceStateContent
+        || self.dataSource.state == BLDataSourceStateNoContent) {
         [self.tableView reloadData];
     } else {
         [self.dataSource startContentLoading];
     }
-}
-
-- (BOOL) shouldCreateDataSource {
-    return self.tableView != nil;
 }
 
 #pragma mark -
@@ -325,7 +350,7 @@ NSString * const kBLDataSourceLastUpdatedKey = @"lastUpdated_%@";
 - (void) showLoading {
     MJRefreshFooter * footer = self.tableView.mj_footer;
     MJRefreshHeader * header = self.tableView.mj_header;
-    if ([self invertRefreshActions]) {
+    if (self.invertPullToRefreshControllers) {
         if (!footer.isRefreshing && !header.isRefreshing)
             [footer beginRefreshing];
         if ([footer isRefreshing])
@@ -341,7 +366,7 @@ NSString * const kBLDataSourceLastUpdatedKey = @"lastUpdated_%@";
 - (void) showNoContent {
     [self stopLoading:YES];
     [[NSUserDefaults standardUserDefaults] setObject:[NSDate date] forKey:[self lastUpdatedKey]];
-    if ([self invertRefreshActions]) {
+    if (self.invertPullToRefreshControllers) {
         self.tableView.mj_header.hidden = YES;
     } else {
         self.tableView.mj_footer.hidden = YES;
@@ -350,7 +375,7 @@ NSString * const kBLDataSourceLastUpdatedKey = @"lastUpdated_%@";
 
 - (void) showError {
     [self stopLoading:NO];
-    if ([self invertRefreshActions]) {
+    if (self.invertPullToRefreshControllers) {
         self.tableView.mj_header.hidden = YES;
     } else {
         self.tableView.mj_footer.hidden = YES;
@@ -371,13 +396,13 @@ NSString * const kBLDataSourceLastUpdatedKey = @"lastUpdated_%@";
 }
 
 - (void) stopLoading:(BOOL) updateTime {
-    dispatch_async(dispatch_get_main_queue(), ^{
+    dispatch_barrier_async(dispatch_get_main_queue(), ^{
         [self.tableView.mj_header endRefreshing];
         [self.tableView.mj_footer endRefreshing];
         
         self.tableView.mj_footer.hidden = NO;
         self.tableView.mj_header.hidden = NO;
-        if ([self invertRefreshActions]) {
+        if (self.invertPullToRefreshControllers) {
             if ([self.dataSource canLoadMore] ) {
                 self.tableView.mj_header.state = MJRefreshStateIdle;
             } else {
@@ -394,24 +419,15 @@ NSString * const kBLDataSourceLastUpdatedKey = @"lastUpdated_%@";
 }
 
 - (BOOL) loadMoreAvailable {
-    return self.dataSource.pagingEnabled;
+    return self.loadMoreEnabled && self.dataSource.pagingEnabled;
 }
 
 - (BOOL) refreshAvailable {
-    return YES;
-}
-
-- (BOOL) invertRefreshActions {
-    return NO;
+    return self.pullToRefreshEnabled;
 }
 
 - (NSString *) lastUpdatedKey {
     return [NSString stringWithFormat:kBLDataSourceLastUpdatedKey, NSStringFromClass([self class])];
-}
-
-#pragma mark -
-- (BOOL) isClassAbstract {
-    return NO;
 }
 
 @end

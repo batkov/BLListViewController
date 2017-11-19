@@ -36,20 +36,13 @@
 - (void) reloadItemsFromSource;
 - (void) updateItemAtIndexPath:(NSIndexPath *) indexPath;
 - (void) startLoadingDataSource;
-- (BOOL) shouldCreateDataSource;
+
 #pragma mark - Abstract Methods
 - (BLListDataSource *) createDataSource;
 - (UITableViewCell *) createCellForIndexPath:(NSIndexPath *) indexPath;
 - (void) customizeCell:(UITableViewCell *) cell forIndexPath:(NSIndexPath *) indexPath;
 - (NSString *) reuseIdentifierForIndexPath:(NSIndexPath *) indexPath;
 - (void) cellSelectedAtIndexPath:(NSIndexPath *) indexPath;
-
-- (BOOL) isClassAbstract; // Default is NO. Return YES if you don't want to create DataSource and Table for this class.
-
-#pragma mark -
-- (BOOL) loadMoreAvailable; // Default is YES. Asks subclasses whether it should create loadMoreController or not.
-- (BOOL) refreshAvailable; // Default is YES. Asks subclasses whether it should create refreshController or not.
-- (BOOL) invertRefreshActions; // Default is NO. Inver actions for refresh and load more controls. Used in reverse lists
 
 #pragma mark -
 - (void) showContent;

@@ -37,4 +37,13 @@ extern NSString * const kBLListDataSourceDefaultCellReuseIdentifier;
 @property (nonatomic, strong) id <BLBaseFetch> fetch;
 @property (nonatomic, strong) id <BLBaseUpdate> update;
 
+// Default is YES. Asks subclasses whether it should create loadMoreController or not.
+@property (nonatomic, assign) BOOL loadMoreEnabled;
+// Default is YES. Asks subclasses whether it should create refreshController or not.
+@property (nonatomic, assign) BOOL pullToRefreshEnabled;
+
+// Default is NO. Invert actions for refresh and load more controls.
+// Used in reverse lists like chat
+@property (nonatomic, assign) BOOL invertPullToRefreshControllers;
+
 @end
