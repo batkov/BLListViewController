@@ -205,19 +205,21 @@ NSString * const kBLDataSourceLastUpdatedKey = @"lastUpdated_%@";
 }
 
 - (void) setupDataSource {
-    // Already setup
-    if (_dataSource) {
-        return;
+    if (!_dataSource) {
+        self.dataSource = [self createDataSource];
+        NSAssert(self.dataSource, @"You need to implement - createDataSource");
     }
-    
-    self.dataSource = [self createDataSource];
-    NSAssert(self.dataSource, @"You need to implement - createDataSource");
-    __weak typeof(self) weakSelf = self;
-    self.dataSource.itemsChangedBlock = ^(id  _Nullable object) {
-        dispatch_barrier_async(dispatch_get_main_queue(), ^{
-            [weakSelf reloadItemsFromSource];
-        });
-    };
+    if (self.dataSource.itemsChangedBlock) {
+        NSLog(@"setupDataSource dataSource provided with itemsChangedBlock.\nDo not forget to reload items in it.");
+    } else {
+        __weak typeof(self) weakSelf = self;
+        self.dataSource.itemsChangedBlock = ^(id  _Nullable object) {
+            dispatch_barrier_async(dispatch_get_main_queue(), ^{
+                [weakSelf reloadItemsFromSource];
+            });
+        };
+    }
+   
 }
 
 - (void) startLoadingDataSource {
