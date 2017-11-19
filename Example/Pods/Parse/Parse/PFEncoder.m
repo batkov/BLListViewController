@@ -16,9 +16,11 @@
 #import "PFFieldOperation.h"
 #import "PFFile_Private.h"
 #import "PFGeoPointPrivate.h"
+#import "PFPolygonPrivate.h"
 #import "PFObjectPrivate.h"
 #import "PFOfflineStore.h"
 #import "PFRelationPrivate.h"
+#import "PFMacros.h"
 
 @implementation PFEncoder
 
@@ -55,9 +57,6 @@
             // Returning this empty object is strictly wrong, but we have to have *something*
             // to put into an object's mutable container cache, and this is just about the
             // best we can do right now.
-            //
-            // [NSException raise:NSInternalInconsistencyException
-            //             format:@"Tried to serialize an unsaved file."];
             return @{ @"__type" : @"File" };
         }
         return @{
@@ -74,6 +73,10 @@
         return [object encodeIntoDictionary];
 
     } else if ([object isKindOfClass:[PFGeoPoint class]]) {
+        // TODO (hallucinogen): pass object encoder here
+        return [object encodeIntoDictionary];
+
+    } else if ([object isKindOfClass:[PFPolygon class]]) {
         // TODO (hallucinogen): pass object encoder here
         return [object encodeIntoDictionary];
 
@@ -122,7 +125,7 @@
 }
 
 - (id)encodeParseObject:(PFObject *)object {
-    [NSException raise:NSInternalInconsistencyException format:@"PFObjects are not allowed here."];
+    PFConsistencyAssertionFailure(@"PFObjects are not allowed here.");
     return nil;
 }
 

@@ -26,7 +26,7 @@
 #import "BLDataObject.h"
 @interface BLDataStructure ()
 
-@property (nonatomic, assign) BLDataSorting sorting; // BLDataStructureSortingUpdatedAt by default
+@property (nonatomic, assign) BLDataSorting sorting; // BLDataSortingCreatedAt by default
 @property (nonatomic, copy) BLCustomSortingBlock customSortingBlock; 
 - (NSArray<id<BLDataObject>> *) orderedArrayFromArray:(NSArray<id<BLDataObject>> *)sourceArray; // Called if BLDataStructureSortingSortingCustom selected
 

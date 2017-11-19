@@ -1,5 +1,5 @@
 //
-//  FSParseFetch.h
+//  BLParseFetch.h
 //  https://github.com/batkov/BLParseFetch
 //
 // Copyright (c) 2016 Hariton Batkov
@@ -22,14 +22,14 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-#import "BLBaseFetch.h"
+@import BLListDataSource;
 #import <Parse/Parse.h>
 
 typedef NSDictionary * (^BLParseCloudParamsBlock)(BLPaging * paging);
-typedef PFQuery * (^BLParseQueryBlock)();
-typedef NSArray<PFQuery *> * (^BLParseOfflineQueriesBlock)();
+typedef PFQuery * (^BLParseQueryBlock)(void);
+typedef NSArray<PFQuery *> * (^BLParseOfflineQueriesBlock)(void);
 
-@interface BLParseFetch : NSObject <BLBaseFetch>
+@interface BLParseFetch : NSObject <BLBaseFetch, BLBaseUpdate>
 
 #pragma mark - Online from cloud func
 @property (nonatomic, strong) NSString * cloudFuncName;
@@ -39,10 +39,11 @@ typedef NSArray<PFQuery *> * (^BLParseOfflineQueriesBlock)();
 @property (nonatomic, copy) BLParseQueryBlock queryBlock;
 
 #pragma mark - Offline from queries
-@property (nonatomic, assign) BOOL offlineFetchAvailable; // Default is [Parse isLocalDatastoreEnabled]
-@property (nonatomic, assign) BOOL offlineStoreAvailable; // Default is [Parse isLocalDatastoreEnabled]
 @property (nonatomic, strong) NSString * pinName; // PFObjectDefaultPin by default
 @property (nonatomic, copy) BLParseOfflineQueriesBlock offlineQueriesBlock;
 
-
+#pragma mark - Offline setup
+// If this property is nil dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0) will be used
+// Default is nil
+@property (nonatomic, strong) dispatch_queue_t offlineFetchQueue;
 @end
