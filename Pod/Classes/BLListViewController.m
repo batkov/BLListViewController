@@ -229,7 +229,9 @@ NSString * const kBLDataSourceLastUpdatedKey = @"lastUpdated_%@";
     
     // setup callback for new dataSource
     _dataSource.delegate = self;
-    _dataSource.itemsChangedBlock = block;
+    if (!_dataSource.itemsChangedBlock && block) {
+        _dataSource.itemsChangedBlock = block;
+    }
 }
 
 - (void) dataSource:(BLDataSource *)dataSource stateChanged:(BLDataSourceState)state {
