@@ -178,7 +178,7 @@ NSString * const kBLDataSourceLastUpdatedKey = @"lastUpdated_%@";
     }
     
     // Already setup
-    if (self.dataSource) {
+    if (_dataSource) {
         return;
     }
     
