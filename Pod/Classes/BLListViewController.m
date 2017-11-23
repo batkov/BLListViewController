@@ -26,7 +26,7 @@
 @import DateTools;
 #import <QuartzCore/QuartzCore.h>
 
-NSString * const kBLListDataSourceDefaultCellReuseIdentifier = @"kBLListDataSourceDefaultCellReuseIdentifier";
+NSString * const kBLListViewControllerDefaultCellReuseIdentifier = @"kBLListViewControllerDefaultCellReuseIdentifier";
 NSString * const kBLDataSourceLastUpdatedKey = @"lastUpdated_%@";
 
 @implementation BLListViewController
@@ -118,7 +118,7 @@ NSString * const kBLDataSourceLastUpdatedKey = @"lastUpdated_%@";
                                                            attribute:NSLayoutAttributeBottom
                                                           multiplier:1.0
                                                             constant:0.0]];
-    self.tableView.rowHeight = 50;
+    self.tableView.rowHeight = kBLListViewControllerDefaultCellHeight;
 }
 
 - (UITableViewStyle) preferredTableViewStyle {
@@ -328,7 +328,7 @@ NSString * const kBLDataSourceLastUpdatedKey = @"lastUpdated_%@";
 }
 
 - (NSString *) reuseIdentifierForIndexPath:(NSIndexPath *) indexPath {
-    return kBLListDataSourceDefaultCellReuseIdentifier; // For subclassing
+    return kBLListViewControllerDefaultCellReuseIdentifier; // For subclassing
 }
 
 #pragma mark - Abstract Methods

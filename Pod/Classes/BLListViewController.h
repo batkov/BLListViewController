@@ -25,7 +25,8 @@
 #import <UIKit/UIKit.h>
 @import BLListDataSource;
 
-extern NSString * const kBLListDataSourceDefaultCellReuseIdentifier;
+extern NSString * const kBLListViewControllerDefaultCellReuseIdentifier;
+static const int kBLListViewControllerDefaultCellHeight = 50.f;
 
 @interface BLListViewController : UIViewController
 
