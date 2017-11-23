@@ -28,6 +28,8 @@
 extern NSString * const kBLListViewControllerDefaultCellReuseIdentifier;
 static const int kBLListViewControllerDefaultCellHeight = 50.f;
 
+static const int kBLErrorSourceFetchObject = 40.f;
+
 @interface BLListViewController : UIViewController
 
 // Set data source that will work for this controller
@@ -50,4 +52,6 @@ static const int kBLListViewControllerDefaultCellHeight = 50.f;
 // Default is NO. If YES 'BLDataObject' will ask whether 'isDataAvailable' or 'isAllDataAvailable'
 // and asked for 'dataSource' to fetch object
 @property (nonatomic, assign) BOOL fetchObjectsIfNeededOnDisplay;
+
+@property (nonatomic, copy) BLErrorBlock errorBlock;
 @end

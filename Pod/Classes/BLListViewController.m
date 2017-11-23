@@ -70,6 +70,12 @@ NSString * const kBLDataSourceLastUpdatedKey = @"lastUpdated_%@";
     [super viewDidLoad];
     [self initTableView];
     [self setupDataSource];
+    
+    // If dataSource does not have onwn error block
+    // We use errorBlock from controller
+    if (!self.dataSource.errorBlock) {
+        self.dataSource.errorBlock = self.errorBlock;
+    }
     [self startLoadingDataSource];
 }
 
@@ -374,7 +380,9 @@ NSString * const kBLDataSourceLastUpdatedKey = @"lastUpdated_%@";
     [self.dataSource fecthObject:objectToFetch callback:^(id  _Nullable object, NSError * _Nullable error) {
         [selff.objectsBeingFetched removeObject:objectId];
         if (error) {
-            // TODO implement logging?
+            if (self.errorBlock) {
+                self.errorBlock(error, kBLErrorSourceFetchObject);
+            }
             return;
         }
         NSIndexPath * indexPath = [selff.dataSource.dataStructure indexPathForObject:objectToFetch];
