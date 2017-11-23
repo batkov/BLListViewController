@@ -42,6 +42,9 @@
 - (void)contentLoaded:(NSError *)error {
     if (error != nil) {
         self.lastError = error;
+        if (self.errorBlock) {
+            self.errorBlock(error, kBLErrorSourceDefault);
+        }
         [self fail];
     } else if (self.hasContent) {
         [self success];

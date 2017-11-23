@@ -34,8 +34,15 @@ typedef NS_ENUM(NSInteger, BLDataSourceState) {
     BLDataSourceStateRefreshContent,
 };
 
+// When BLDataSource 'lastError' changed 'errorBlock' will be triggered with BLErrorSourceDefault
+static const NSInteger kBLErrorSourceDefault = 0;
+
+// When BLInteractionDataSource offline call failed, but it won't affect overal state of DataSource
+static const NSInteger kBLErrorSourceOfflineRequest = 10;
+
 typedef void (^BLIdResultBlock)(_Nullable id object, NSError *_Nullable error);
 typedef void (^BLBoolResultBlock)(BOOL result, NSError *_Nullable error);
+typedef void (^BLErrorBlock)(NSError *_Nonnull error, int errorSource);
 typedef void (^BLObjectBlock)(_Nullable id object);
 typedef void(^BLDataSourceStateBlock)(BLDataSourceState state);
 

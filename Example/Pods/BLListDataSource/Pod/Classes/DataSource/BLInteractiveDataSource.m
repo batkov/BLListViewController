@@ -164,8 +164,11 @@
     }
     __weak typeof(self) selff = self;
     [self.fetch fetchOffline:^(id  _Nullable object, NSError * _Nullable error) {
+        BOOL goingToCallContentLoaded = refresh;
         if (error) {
-            // TODO implement loging ?
+            if (self.errorBlock && !goingToCallContentLoaded) {
+                self.errorBlock(error, kBLErrorSourceOfflineRequest);
+            }
         } else if (![selff hasContent] || refresh) {
             if (selff.fetchMode == BLFetchModeOfflineOnly) {
                 [selff cleanContent];
@@ -173,7 +176,7 @@
             BLBaseFetchResult * result = [selff createFetchResultForLocalObject:object];
             [selff processFetchResult:result];
         }
-        if (refresh) {
+        if (goingToCallContentLoaded) {
             [selff contentLoaded:error];
         }
     }];

@@ -30,7 +30,11 @@
 @interface BLDataSource : NSObject
 
 @property (weak, nonatomic, nullable) id <BLDataSourceDelegate> delegate;
+
+// Called when 'state' changed
 @property (copy, nonatomic, nullable) BLDataSourceStateBlock stateChangedBlock;
+// When BLDataSource 'lastError' changed 'errorBlock' will be triggered with BLErrorSourceDefault
+@property (copy, nonatomic, nullable) BLErrorBlock errorBlock;
 
 @property (assign, nonatomic, readonly) BLDataSourceState state;
 @property (strong, nonatomic, readonly, nullable) NSError *lastError;
