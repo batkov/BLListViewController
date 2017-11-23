@@ -61,6 +61,8 @@ NSString * const kBLDataSourceLastUpdatedKey = @"lastUpdated_%@";
     self.invertPullToRefreshControllers = NO;
     self.pullToRefreshEnabled = YES;
     self.loadMoreEnabled = YES;
+    self.fetchObjectsIfNeededOnDisplay = NO;
+    self.objectsBeingFetched = [NSMutableArray array];
 }
 
 #pragma mark - View Lifecycle
@@ -299,6 +301,7 @@ NSString * const kBLDataSourceLastUpdatedKey = @"lastUpdated_%@";
         NSAssert(cell, @"Cannot handle nil value of createCellForIndexPath:");
     }
     [self customizeCell:cell forIndexPath:indexPath];
+    [self preFetchObjectAt:indexPath];
     return cell;
 }
 
@@ -342,6 +345,46 @@ NSString * const kBLDataSourceLastUpdatedKey = @"lastUpdated_%@";
 
 - (void) cellSelectedAtIndexPath:(NSIndexPath *) indexPath {
     
+}
+
+#pragma mark -
+-(void) preFetchObjectAt:(NSIndexPath *)indexPath {
+    if (!self.fetchObjectsIfNeededOnDisplay) {
+        return;
+    }
+    id<BLDataObject> objectToFetch = [self.dataSource.dataStructure objectForIndexPath:indexPath];
+    BOOL isAdataAvailable = YES;
+    if ([objectToFetch respondsToSelector:@selector(isAllDataAvailable)]) {
+        isAdataAvailable = [objectToFetch isAllDataAvailable];
+    } else if ([objectToFetch respondsToSelector:@selector(isDataAvailable)]) {
+        isAdataAvailable = [objectToFetch isDataAvailable];
+    }
+    // Object said that everything fetched
+    if (isAdataAvailable) {
+        return;
+    }
+    NSString * objectId = objectToFetch.objectId;
+    // Object does not saved on server or already fetching
+    if (objectId &&
+        [self.objectsBeingFetched containsObject:objectId]) {
+        return;
+    }
+    __weak typeof(self) selff  = self;
+    [self.objectsBeingFetched addObject:objectId];
+    [self.dataSource fecthObject:objectToFetch callback:^(id  _Nullable object, NSError * _Nullable error) {
+        [selff.objectsBeingFetched removeObject:objectId];
+        if (error) {
+            // TODO implement logging?
+            return;
+        }
+        NSIndexPath * indexPath = [selff.dataSource.dataStructure indexPathForObject:objectToFetch];
+        dispatch_barrier_async(dispatch_get_main_queue(), ^{
+            if (indexPath && [selff.tableView.indexPathsForVisibleRows containsObject:indexPath]) {
+                UITableViewCell * cell = [selff.tableView cellForRowAtIndexPath:indexPath];
+                [selff customizeCell:cell forIndexPath:indexPath];
+            }
+        });
+    }];
 }
 
 #pragma mark - Top Info

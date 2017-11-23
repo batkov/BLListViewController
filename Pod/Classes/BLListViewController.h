@@ -47,4 +47,7 @@ static const int kBLListViewControllerDefaultCellHeight = 50.f;
 // Used in reverse lists like chat
 @property (nonatomic, assign) BOOL invertPullToRefreshControllers;
 
+// Default is NO. If YES 'BLDataObject' will ask whether 'isDataAvailable' or 'isAllDataAvailable'
+// and asked for 'dataSource' to fetch object
+@property (nonatomic, assign) BOOL fetchObjectsIfNeededOnDisplay;
 @end
