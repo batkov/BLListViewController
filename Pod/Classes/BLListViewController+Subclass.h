@@ -29,6 +29,8 @@
 @interface BLListViewController () <BLDataSourceDelegate, UITableViewDataSource, UITableViewDelegate>
 @property (nonatomic, strong) IBOutlet UITableView * tableView;
 
+@property (nonatomic, strong) NSMutableArray * objectsBeingFetched;
+
 - (UITableViewStyle) preferredTableViewStyle;
 
 - (UIView *) parentViewForTable;
@@ -43,7 +45,7 @@
 - (void) customizeCell:(UITableViewCell *) cell forIndexPath:(NSIndexPath *) indexPath;
 - (NSString *) reuseIdentifierForIndexPath:(NSIndexPath *) indexPath;
 - (void) cellSelectedAtIndexPath:(NSIndexPath *) indexPath;
-
+- (void) preFetchObjectAt:(NSIndexPath *)indexPath;
 #pragma mark -
 - (void) showContent;
 @end

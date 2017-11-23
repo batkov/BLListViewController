@@ -1,15 +1,15 @@
 PODS:
-  - BLListDataSource (0.9.27)
-  - BLListViewController (0.9.14):
+  - BLListDataSource (0.9.31)
+  - BLListViewController (0.9.18):
     - BLListDataSource
     - DateTools
     - MJRefresh
-  - BLParseFetch (0.4.0):
+  - BLParseFetch (0.5.0):
     - BLListDataSource
     - Parse
   - Bolts/Tasks (1.8.4)
   - DateTools (2.0.0)
-  - MJRefresh (3.1.15)
+  - MJRefresh (3.1.15.1)
   - Parse (1.15.3):
     - Bolts/Tasks (~> 1.8)
 
@@ -22,12 +22,12 @@ EXTERNAL SOURCES:
     :path: ../
 
 SPEC CHECKSUMS:
-  BLListDataSource: fb5a03d89d351f20e762c9c3c1ea53d5ca011ccf
-  BLListViewController: b3a417ab3b38ebdd1fa8c28451bf0aea1221eac7
-  BLParseFetch: 4df206d7a088cb8264f05456420e5adb63870c42
+  BLListDataSource: aab700a6b47ff321648c08abc7a7146dbaee21b8
+  BLListViewController: 94a779fa434a694d8f5f940d1de802c9d07629db
+  BLParseFetch: c63079edacd479ede3de9f1812e7ba843cedf7c1
   Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
   DateTools: 933ac9c490f21f92127cf690ccd8c397e0126caf
-  MJRefresh: 9af70f5f9327a2cf87f0fb5929f35fcc2fa638ea
+  MJRefresh: 5f8552bc25ca8751c010f621c1098dbdaacbccd6
   Parse: cdc0f1f975ee8be0409e66f21b05df4ae067047c
 
 PODFILE CHECKSUM: 8cb3fdddf803f0479d6f2a96c7f97f887e87ce9b

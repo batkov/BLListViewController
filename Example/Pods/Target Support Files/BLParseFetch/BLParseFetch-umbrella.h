@@ -11,6 +11,7 @@
 #endif
 
 #import "BLParseFetch.h"
+#import "BLParseInteraction.h"
 
 FOUNDATION_EXPORT double BLParseFetchVersionNumber;
 FOUNDATION_EXPORT const unsigned char BLParseFetchVersionString[];
