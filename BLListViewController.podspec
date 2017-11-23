@@ -8,11 +8,11 @@
 
 Pod::Spec.new do |s|
   s.name             = "BLListViewController"
-  s.version          = "0.9.18"
+  s.version          = "0.9.19"
   s.summary          = "BLListViewController is used to display information got from BLListDataSource."
 
   s.description      = <<-DESC
-  BLListViewController is used to display information got from BLListDataSource. Example is written with usage of BLParseFetch to demontrate abilities of each of lib.
+  BLListViewController is used to display information got from BLListDataSource. Example is written with usage of BLParseFetch to demonstrate abilities of each library.
                        DESC
 
   s.homepage         = "https://github.com/batkov/BLListViewController"
